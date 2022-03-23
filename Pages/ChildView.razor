@@ -1,0 +1,67 @@
+@page "/child-view"
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+<div class="child-view-container row">
+    <IgbDataGrid DataSource="financialDataFinTable" AutoGenerateColumns="false" Density="ControlDisplayDensity.Cosy" SelectionMode="GridSelectionMode.None" Width="100%" Height="100%" DefaultColumnMinWidth="136" class="grid" child-view-scope>
+        <IgbNumericColumn HeaderText="id" Field="Id" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbTextColumn HeaderText="category" Field="Category" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="type" Field="Type" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="contract" Field="Contract" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="settlement" Field="Settlement" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="country" Field="Country" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="region" Field="Region" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbDateTimeColumn HeaderText="LastUpdate" Field="LastUpdate" IsFilteringEnabled="true"></IgbDateTimeColumn>
+        <IgbNumericColumn HeaderText="openPrice" Field="OpenPrice" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="price" Field="Price" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="change" Field="Change" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="changeP" Field="ChangeP" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="buy" Field="Buy" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="sell" Field="Sell" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="spread" Field="Spread" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="volume" Field="Volume" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="highD" Field="HighD" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="lowD" Field="LowD" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="highY" Field="HighY" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="lowY" Field="LowY" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="startY" Field="StartY" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbTextColumn HeaderText="indGrou" Field="IndGrou" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="indSect" Field="IndSect" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="indSubg" Field="IndSubg" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="secType" Field="SecType" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="issuerN" Field="IssuerN" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="moodys" Field="Moodys" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="fitch" Field="Fitch" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="dbrs" Field="Dbrs" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="collatT" Field="CollatT" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="curncy" Field="Curncy" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="security" Field="Security" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="sector" Field="Sector" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="cusip" Field="Cusip" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="ticker" Field="Ticker" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="cpn" Field="Cpn" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbDateTimeColumn HeaderText="maturity" Field="Maturity" IsFilteringEnabled="true"></IgbDateTimeColumn>
+        <IgbNumericColumn HeaderText="krD_3YR" Field="KrD_3YR" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="zV_SPREAD" Field="ZV_SPREAD" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="kRD_5YR" Field="KRD_5YR" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbNumericColumn HeaderText="kRD_1YR" Field="KRD_1YR" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbTextColumn HeaderText="indGrou2" Field="IndGrou2" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="indSect3" Field="IndSect3" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="indSubg4" Field="IndSubg4" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="secType5" Field="SecType5" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="issuerN6" Field="IssuerN6" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="moodys7" Field="Moodys7" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="fitch8" Field="Fitch8" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="dbrs9" Field="Dbrs9" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="collatT10" Field="CollatT10" IsFilteringEnabled="true"></IgbTextColumn>
+    </IgbDataGrid>
+</div>
+
+@code {
+    private FinancialData.FinTableType[] financialDataFinTable = Array.Empty<FinancialData.FinTableType>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        financialDataFinTable = await HttpClient.GetFromJsonAsync<FinancialData.FinTableType[]>("https://excel2json.io/api/share/ce22eedde5a9404288ce38024ce198b9") ?? financialDataFinTable;
+    }
+}

@@ -1,0 +1,68 @@
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<div class="master-view-container column">
+    <div class="header row">
+        <div class="group_1 group_2 row">
+            <img src="https://static.infragistics.com/marketing/slingshot/slingshot-icon.svg" class="image" />
+            <IgbButton Variant="ButtonVariant.Flat" class="button" master-view-scope>
+                <span>Home</span>
+                <span class="material-icons">keyboard_arrow_down</span>
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <span class="project-dropdown">Dropdown not yet available in Blazor</span>
+        </div>
+        <div class="group_1 row">
+            <IgbButton Variant="ButtonVariant.Contained" class="button_1" master-view-scope>
+                <span class="material-icons">add</span>
+                <span>Task</span>
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Flat" class="button_2" master-view-scope>
+                <span class="material-icons">add_alert</span>
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbButton Variant="ButtonVariant.Flat" class="button_2" master-view-scope>
+                <span class="material-icons">message</span>
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+            <IgbAvatar Src="https://d3cg6cexo8t5ug.cloudfront.net/avatars/avatar6.png" Shape="AvatarShape.Circle"></IgbAvatar>
+            <span class="section">Dropdown not yet available in Blazor</span>
+        </div>
+    </div>
+    <div class="group row">
+        <IgbNavDrawer Open="false" class="nav-drawer" master-view-scope>
+            <span slot="mini">
+                <IgbNavDrawerItem Active="false" @onclick="@(e => Navigate("/"))" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">assignment_turned_in</span>
+                </IgbNavDrawerItem>
+                <IgbNavDrawerItem Active="false" @onclick="@(e => Navigate("/dashboards"))" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">dashboard</span>
+                </IgbNavDrawerItem>
+                <IgbNavDrawerItem Active="false" @onclick="@(e => Navigate("/child-view"))" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">vertical_split</span>
+                </IgbNavDrawerItem>
+                <IgbNavDrawerItem Active="false" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">bar_chart</span>
+                </IgbNavDrawerItem>
+                <IgbNavDrawerItem Active="false" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">folder</span>
+                </IgbNavDrawerItem>
+            </span>
+            <div>
+                <IgbNavDrawerItem Active="false" class="nav-drawer-item" master-view-scope>
+                    <span slot="content" class="material-icons icon">account_circle</span>
+                    <span slot="content" class="fake_title">Title goes here</span>
+                </IgbNavDrawerItem>
+            </div>
+        </IgbNavDrawer>
+        <div class="view-container">@Body</div>
+    </div>
+</div>
+
+@code {
+    private void Navigate(string path)
+    {
+        NavigationManager.NavigateTo(path);
+    }
+}

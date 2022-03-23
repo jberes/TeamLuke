@@ -1,0 +1,12 @@
+.child-view-container {
+    align-items: stretch;
+    height: 100%;
+}
+.grid {
+    min-width: 50px;
+    min-height: 50px;
+    flex-shrink: 0;
+}
+.row {
+    display: flex;
+}
